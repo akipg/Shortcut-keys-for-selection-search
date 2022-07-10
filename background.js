@@ -11,7 +11,7 @@ chrome.commands.onCommand.addListener(function(command) {
   else if (command == "search_selection_in_DefaultEngine_4NewWindow") {
     openSearchTab_DefaultEngine("NEW_WINDOW");
   }
-  else if (command == "search_selection_in_DefaultEngine_4CurrentTab") {
+  else if (command == "search_selection_in_DefaultEngine_5CurrentTab") {
     openSearchTab_DefaultEngine("CURRENT_TAB");
   }
 });
@@ -48,7 +48,6 @@ function openSearchTab_DefaultEngine(disposition){
       if(!results)
         return false
       var searchString = decodeURI(results[0]);
-      var searchURL = baseURL_bef + searchString + baseURL_aft;
       chrome.search.query({
         text: searchString,
         disposition
