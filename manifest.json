@@ -15,6 +15,15 @@
          "suggested_key": {
             "default": "Alt+Shift+1"
          }
+      },
+      "search_selection_in_DefaultEngine_3NewTab": {
+         "description": "search in default search engine(open in a new tab)"
+      },
+      "search_selection_in_DefaultEngine_4NewWindow": {
+         "description": "search in default search engine (open in a new window)"
+      },
+      "search_selection_in_DefaultEngine_5CurrentTab": {
+         "description": "search in default search engine (open in the current tab)"
       }
    },
    "description": "Add shortcut keys to open a new google result tab for selected text. Shortcut keys can be set in above left menu in Extensions.",
@@ -27,5 +36,5 @@
    "name": "Shortcut keys for selection search",
    "permissions": [ "activeTab" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "0.1.0.1"
+   "version": "0.2"
 }
