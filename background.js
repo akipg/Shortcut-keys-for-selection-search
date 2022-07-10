@@ -6,10 +6,13 @@ chrome.commands.onCommand.addListener(function(command) {
     openSearchTab(baseURL_bef="https://www.google.com/search?q=", baseURL_aft="",  f_Active=false);
   }
   else if (command == "search_selection_in_DefaultEngine_3NewTab") {
-    openSearchTab(baseURL_bef="https://www.google.com/search?q=", baseURL_aft="",  f_Active=false);
+    openSearchTab_DefaultEngine("NEW_TAB");
   }
-  else if (command == "search_selection_in_DefaultEngine_4Background") {
-    openSearchTab(baseURL_bef="https://www.google.com/search?q=", baseURL_aft="",  f_Active=false);
+  else if (command == "search_selection_in_DefaultEngine_4NewWindow") {
+    openSearchTab_DefaultEngine("NEW_WINDOW");
+  }
+  else if (command == "search_selection_in_DefaultEngine_4CurrentTab") {
+    openSearchTab_DefaultEngine("CURRENT_TAB");
   }
 });
 
@@ -34,7 +37,7 @@ function openSearchTab(baseURL_bef, baseURL_aft="", f_Active){
   return true
 }
 
-function openSearchTab_DefaultEngine(searchString, disposition){
+function openSearchTab_DefaultEngine(disposition){
   chrome.tabs.executeScript(null, {
     'code': 'encodeURI( document.selection ? document.selection.createRange().text\
               : window.getSelection ? window.getSelection()\
