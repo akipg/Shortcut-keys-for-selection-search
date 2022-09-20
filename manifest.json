@@ -35,7 +35,7 @@
    "name": "Shortcut keys for selection search",
    "permissions": [ "activeTab", "search", "contextMenus", "scripting" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "0.21",
+   "version": "0.3",
    "web_accessible_resources": [{
       "resources": ["query-pdf.js"],
       "matches": ["<all_urls>"],
