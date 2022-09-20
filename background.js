@@ -65,7 +65,7 @@ function getPdfSelectedText() {
 }
 
 function injection() {
-  console.log("injection")
+  //console.log("injection")
   // get DOM selected text
   const domSelectionText = decodeURI(encodeURI(
     document.selection ? document.selection.createRange().text
@@ -73,16 +73,16 @@ function injection() {
         : document.getSelection ? document.getSelection()
           : ""
   ));
-  console.log("injection", "domSelectionText", domSelectionText);
+  //console.log("injection", "domSelectionText", domSelectionText);
   if (domSelectionText) {
-    console.log("injection", "return domSelectionText", domSelectionText);
+    //console.log("injection", "return domSelectionText", domSelectionText);
     return new Promise(resolve => resolve(domSelectionText));
   }
   else if(document.querySelector('embed')){
 
     // get PDF selected text in chrome internal plugin
     // refer to: https://stackoverflow.com/questions/61076303/how-can-i-get-selected-text-in-pdf-in-javascript
-    console.log("PDFINJECTION")
+    //console.log("PDFINJECTION")
     return new Promise(resolve => {
       window.addEventListener('message', function onMessage(e) {
         if (e.origin === 'chrome-extension://mhjfbmdgcfjbbpaeojofohoefgiehjai' &&
