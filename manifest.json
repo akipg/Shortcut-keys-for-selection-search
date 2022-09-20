@@ -33,7 +33,7 @@
    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2EA1xyxxT7N5LFPD03P6cT1aKqE6eZYQUKlya4eUZZyAaYHMjfQkRnX4MgYELnzr4NH39kNdVJBf/azQbTo/q7hH6rCe7SzNrAK8jvHuMSppPNERueyT/tox6G3uoLKXciiPcPp70TuPsrIfEUnRgU1kJknirQ17m6wmr2Pzn2cNyYBwoxDRTKiL0K2+U5bBRCQPrc/i+jw2Y7A7wUgj2KROVXPP0n45i3+dvNl0zcvgtOV3mBkXN4qBtLMX3Z89R9fKNIH6cAg60oE752HBdbxsyJnKX7JcqtA0K/n07UEb5gjTCy87CEyebYPNjXPDO2bxDUHX+AWnqG1U/PNX0QIDAQAB",
    "manifest_version": 3,
    "name": "Shortcut keys for selection search",
-   "permissions": [ "activeTab", "search", "contextMenus", "scripting" ],
+   "permissions": [ "activeTab", "search", "scripting" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
    "version": "0.3",
    "web_accessible_resources": [{
