@@ -36,5 +36,5 @@
    "name": "Shortcut keys for selection search",
    "permissions": [ "activeTab", "search", "scripting" ],
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "0.4.0"
+   "version": "0.400"
 }
