@@ -1,5 +1,6 @@
 chrome.commands.onCommand.addListener(function(command) {
-    if (command == "search_selection_in_Google_1Foreground") {
+  console.log("command:", command);
+  if (command == "search_selection_in_Google_1Foreground") {
     openSearchTab("https://www.google.com/search?q=", "",  true);
   }
   else if (command == "search_selection_in_Google_2Background") {
@@ -21,10 +22,10 @@ async function getCurrentTab(){
   return tabs[0];
 }
 
-async function getSelectedTextInAllFrames(){
+async function getSelectedText(){
   const tab = await getCurrentTab();
   const results = await chrome.scripting.executeScript({
-      target: {tabId: tab.id, allFrames: true},
+      target: {tabId: tab.id, allFrames: false},
       func: function(){
         return encodeURI(
           document.selection ? document.selection.createRange().text :
@@ -34,13 +35,14 @@ async function getSelectedTextInAllFrames(){
         );
       }
     })
-    return results;
+    console.log("getSelectedText()", results[0])
+    return results[0].result;
 }
 
 function openSearchTab(baseURL_bef, baseURL_aft="", f_Active){
-  getSelectedTextInAllFrames().then(results => {
-    if(!results) return false;
-    var searchString = decodeURI(results[0].result);
+  getSelectedText().then(result => {
+    if(!result) return false;
+    var searchString = decodeURI(result);
     var searchURL = baseURL_bef + searchString + baseURL_aft;
     chrome.tabs.create({
       'url':searchURL,
@@ -51,9 +53,9 @@ function openSearchTab(baseURL_bef, baseURL_aft="", f_Active){
 }
 
 function openSearchTab_DefaultEngine(disposition){
-  getSelectedTextInAllFrames().then(results => {
+  getSelectedText().then(results => {
     if(!results) return false;
-    var searchString = decodeURI(results[0].result);
+    var searchString = decodeURI(result);
     chrome.search.query({
       text: searchString,
       disposition
