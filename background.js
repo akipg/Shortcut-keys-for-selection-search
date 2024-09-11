@@ -23,44 +23,63 @@ async function getCurrentTab(){
 }
 
 async function getSelectedText(){
+  // Get current tab
   const tab = await getCurrentTab();
+
+  // Get selected text
   const results = await chrome.scripting.executeScript({
       target: {tabId: tab.id, allFrames: false},
       func: function(){
-        return encodeURI(
-          document.selection ? document.selection.createRange().text :
+        let selectedText = document.selection ? document.selection.createRange().text :
           window.getSelection ? window.getSelection() :
-          document.getSelection ? document.getSelection() :
-          ""
-        );
+            document.getSelection ? document.getSelection() :
+            "";
+        selectedText = String(selectedText).replace(/\r?\n|\r/g, ''); // Remove line breaks
+        return encodeURIComponent(selectedText);
       }
     })
-    console.log("getSelectedText()", results[0])
-    return results[0].result;
+
+    // Return value
+    if(results.length <= 0){
+      // Failed
+      console.warn("[Failed] getSelectedText() returns \"\"", "results:", results);
+      return "";
+    }
+    else{
+      const searchText = results[0].result;
+      if (searchText !== "" && !searchText){
+        // InvalidResult
+        console.warn("[InvalidResult] getSelectedText() returns \"\"", "results:" ,results);
+        return "";
+      } else {
+        // Success
+        console.log("[Success] getSelectedText() retunrs encoded", `"${searchText}"`, "of", `"${decodeURIComponent(searchText)}"`, "results:", results);
+        return searchText;
+      }
+    }
 }
 
 function openSearchTab(baseURL_bef, baseURL_aft="", f_Active){
   getSelectedText().then(result => {
-    if(!result) return false;
-    var searchString = decodeURI(result);
+    var searchString = result; // Do not decode here.
     var searchURL = baseURL_bef + searchString + baseURL_aft;
     chrome.tabs.create({
       'url':searchURL,
       'active':f_Active
     });
   });   
-  return true
+  return true;
 }
 
 function openSearchTab_DefaultEngine(disposition){
-  getSelectedText().then(results => {
-    if(!results) return false;
-    var searchString = decodeURI(result);
-    chrome.search.query({
-      text: searchString,
-      disposition
-    })
+  getSelectedText().then(result => {
+    var searchString = decodeURIComponent(result);
+    if(searchString !== ""){
+      chrome.search.query({
+        text: searchString,
+        disposition
+      });
+    }
   });
-  return true
-
+  return true;
 }
